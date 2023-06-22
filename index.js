@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-
+const cors = require('cors');
 const app = express();
 const port = 4000;
 require('dotenv').config();
@@ -48,6 +48,11 @@ async function sendEmail(formData) {
   await transporter.sendMail(message);
   console.log('Email sent');
 }
+app.use(cors());
+
+// Middleware to parse JSON and URL-encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Start the server
 app.listen(port, () => {
