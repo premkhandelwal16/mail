@@ -32,7 +32,7 @@ async function sendEmail(formData) {
     secure: false,
     auth: {
       user: 'prem.dkhandelwal@gmail.com', // Replace with your Gmail email address
-      pass: process.env.PASSWORD, // Replace with your Gmail password or app-specific password
+      pass: 'kdxkywpqbdrddwyb', // Replace with your Gmail password or app-specific password
     },
   });
 
