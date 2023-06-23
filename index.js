@@ -15,10 +15,10 @@ const corsOptions ={
     optionSuccessStatus:200
 }
 app.use(cors({
-  credentials: true,
-  preflightContinue: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
-  origin: true
+    credentials: true,
+    preflightContinue: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH' , 'DELETE', 'OPTIONS'],
+    origin: true
 }));
 
 app.use(bodyParser.json());
