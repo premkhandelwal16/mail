@@ -4,10 +4,23 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const app = express();
 const port = 4000;
+const cors = require('cors');
 require('dotenv').config();
+
+app.options('*', cors());
 // Middleware to parse JSON and URL-encoded bodies
+
+
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware to parse JSON and URL-encoded bodies
 
 // POST endpoint to handle form data
 app.post('/submitform', async (req, res) => {
@@ -48,17 +61,7 @@ async function sendEmail(formData) {
   await transporter.sendMail(message);
   console.log('Email sent');
 }
-const cors = require('cors');
-const corsOptions ={
-    origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
 
-// Middleware to parse JSON and URL-encoded bodies
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Start the server
 app.listen(port, () => {
