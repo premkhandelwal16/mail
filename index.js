@@ -1,20 +1,13 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-
+const cors = require('cors');
 const app = express();
 const port = 4000;
-
-// Enable CORS for all routes
-app.use(cors());
-
+require('dotenv').config();
 // Middleware to parse JSON and URL-encoded bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Handle preflight request for all routes
-app.options('*', cors());
 
 // POST endpoint to handle form data
 app.post('/submitform', async (req, res) => {
@@ -45,8 +38,8 @@ async function sendEmail(formData) {
 
   // Create the email message
   const message = {
-    from: formData.emailId,
-    to: 'prem.dkhandelwal@gmail.com', // Replace with the recipient's email address
+    from: 'prem.dkhandelwal@gmail.com',
+    to: formData.emailId, // Replace with the recipient's email address
     subject: 'Collaboration Form Submission',
     text: JSON.stringify(formData, null, 2),
   };
@@ -55,6 +48,17 @@ async function sendEmail(formData) {
   await transporter.sendMail(message);
   console.log('Email sent');
 }
+const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
+// Middleware to parse JSON and URL-encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Start the server
 app.listen(port, () => {
