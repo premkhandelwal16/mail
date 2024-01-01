@@ -16,11 +16,7 @@ app.use(function (req, res, next) {
     next();
   });
 // Middleware
-app.use(cors({
-  origin: 'https://premkhandelwal.github.io', // Add your front-end domain
-  methods: 'POST',
-  credentials: true,
-}));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -42,7 +38,6 @@ async function sendEmail(formData) {
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
-    secure: true,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD,
