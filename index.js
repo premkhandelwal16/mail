@@ -8,7 +8,11 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://premkhandelwal.github.io', // Add your front-end domain
+  methods: 'POST',
+  credentials: true,
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
