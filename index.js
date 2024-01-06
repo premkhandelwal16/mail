@@ -70,8 +70,8 @@ async function sendEmail(formData) {
   const transporter = await createTransporter();
 
   const message = {
-    from: process.env.EMAIL_USER,
-    to: formData.emailId,
+    from: formData.emailId,
+    to: process.env.EMAIL_USER,
     subject: 'Collaboration Form Submission',
     text: JSON.stringify(formData, null, 2),
   };
