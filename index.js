@@ -28,9 +28,7 @@ app.post('/submitform', async (req, res) => {
 // Function to send email
 async function sendEmail(formData) {
   const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
-    secure: false,
+    service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD,
